@@ -172,10 +172,10 @@ Bounds = {
         'RT':"D",
         'RV':Tsub
         }
-def C(u_in):
+def C(u_in,sys):
     #return getKe(u_in)/getCe(u_in)
     return [1E-2 for i in range(len(u_in))]
-def C_ph(u_in):
+def C_ph(u_in,sys):
     #return getKe(u_in)/getCe(u_in)
     return [1E-3 for i in range(len(u_in))]
 def S(X,t,sys):
@@ -206,7 +206,7 @@ def S_ph(X,t,sys):
 #plt.close(fig2)
 
 #sys = Solver1D(xGrid,tGrid,Nsys,[initial],[Bounds],[C],[S]) working 1D model
-sys = Solver1D(xGrid,tGrid,Nsys,[initial,initial_ph],[Bounds,Bounds],[C,C_ph],[S,S_ph])
+sys = Solver1D(np.meshgrid(xGrid),tGrid,Nsys,[initial,initial_ph],[Bounds,Bounds],[C,C_ph],[S,S_ph])
 soln = sys.solve()
 sys.plotSolution()
 V=np.zeros(nT)
